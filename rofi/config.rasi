@@ -1,0 +1,9 @@
+
+configuration {
+
+/* show-icons:true;*/
+modi: "window,drun,ssh,combi";
+ font: "Inconsolata 10";
+ combi-modi: "window,drun,ssh";
+ }
+@theme "~/.config/rofi/themes/center.rasi"

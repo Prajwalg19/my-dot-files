@@ -35,5 +35,8 @@
     "javascript.preferences.renameMatchingJsxTags": true,
     "dialog.rounded": true,
     "languageserver": {},
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/18.1.3/clangd_18.1.3/bin/clangd"
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/18.1.3/clangd_18.1.3/bin/clangd",
+    "tsserver.implicitProjectConfig.checkJs": true,
+    "list.smartCase": false,
+    "tailwindCSS.suggestions": true
 }

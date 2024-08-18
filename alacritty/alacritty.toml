@@ -1,30 +1,16 @@
 [font]
 size = 11.0
-
-[font.normal]
-family = "Mononoki Nerd Font"
-style = "Regular"
-
-[font.bold]
-family = "Mononoki Nerd Font"
-style = "Bold"
-
-[font.italic]
-family = "Mononoki Nerd Font"
-style = "Italic"
-
-[font.bold_italic]
-family = "Mononoki Nerd Font"
-style = "Bold Italic"
-
-[font.offset]
-x = 1
-y = 0
+normal = {family = "Mononoki Nerd Font",style = "Regular"}
+bold = {family = "Mononoki Nerd Font",style = "Bold"}
+italic  = {family = "Mononoki Nerd Font",style = "Italic"}
+bold_italic = {family = "Mononoki Nerd Font",style = "Bold Italic"}
+offset = {x = 1,y = 0}
 
 [colors]
+
 [colors.primary]
 background = "#0b0b0f"
-foreground = "#bbc2cf"
+foreground = "#c0caf5"
 
 [colors.cursor]
 text = "CellBackground"
@@ -36,26 +22,25 @@ background = "#3e4451"
 
 [colors.normal]
 black = "#1c1f24"
-red = "#ff6c6b"
-green = "#98be65"
-yellow = "#da8548"
-blue = "#51afef"
-magenta = "#c678dd"
-cyan = "#5699af"
-white = "#abb2bf"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#f0a02e"
+blue = "#0096FF"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#a9b1d6"
 
 [colors.bright]
-black = "#5b6268"
-red = "#da8548"
-green = "#4db5bd"
-yellow = "#ecbe7b"
-blue = "#3071db"
-magenta = "#a9a1e1"
-cyan = "#46d9ff"
-white = "#dfdfdf"
+black = "#545c7e"
+red = "#ff007c"
+green = "#73daca"
+yellow = "#ff9e64"
+blue = "#2ac3de"
+magenta = "#9d7cd8"
+cyan = "#b4f9f8"
+white = "#a9b1d6"
 
 [window]
-opacity=0.93
-blur= true
-decorations="Buttonless"
-
+opacity = 0.93
+padding = {x=0, y=0}
+dynamic_padding=false

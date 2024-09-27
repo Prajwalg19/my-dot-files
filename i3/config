@@ -14,30 +14,11 @@ set $mod Mod4
 exec_always xrandr --rate 60
 #touchpad
 exec_always xinput set-prop 13 "Device Enabled" 0
-# bindsym Print exec maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
-# bindsym $mod+Print exec maim --select | tee ~/Pictures/$(date +%s).png | xclip -sel c -t image/png
-
-# Screenshots
-#anytyhing with mod is for active window
-#anything with ctrl is for clipboard
-#aything with shift is for cropping
-
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshots/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/Active_Screenshots/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/Cropped/$(date)"
-
-## Clipboard Screenshots
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
-bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
-
 
 bindsym $mod+Shift+Return exec --no-startup-id rofi -show drun
 
-
 bindsym $mod+Control+l workspace next
 bindsym $mod+Control+h workspace prev
-# bindsym $mod+Shift+Return exec ulauncher
 # Default modkey
 
 # Hide titlebar
@@ -118,7 +99,7 @@ set $workspace2 "2:  "
 set $workspace3 "3:  "
 set $workspace4 "4:  "
 set $workspace5 "5:  "
-set $workspace6 "6:  "
+set $workspace6 "6: 󰡨 "
 set $workspace7 "7:  "
 set $workspace8 "8:  "
 set $workspace9 "9:  "
@@ -151,9 +132,10 @@ bindsym $mod+Shift+0 move container to workspace $workspace0
 # Always open some programs on specified workspace
 # assign [class="^Slack"]            $workspace7
 assign [class="^Spotify"]          $workspace0
-assign [class="^Thunderbird"]      $workspace8
 assign [class="^YouTube Music"]    $workspace0
-assign [class="^Xournal"]           $workspace6
+assign [class="^Thunderbird"]      $workspace8
+assign [class="^Xournal"]           $workspace5
+assign [class="^Docker Desktop"]           $workspace6
 # assign [class="^firefox"]           $workspace2
 
 # Enable float for some windows
@@ -166,6 +148,7 @@ for_window [class="^gnome-calculator"] floating enable
 for_window [class="^Vlc"] floating enable
 for_window [class="^vlc"] floating enable
 for_window [class="^Main"] floating enable
+for_window [class="^Qalculate-gtk"] floating enable
 
 # for_window [class="^Nemo"]  floating enable
 # Always open workspaces in certain outputs
@@ -361,3 +344,4 @@ bindsym $mod+F2 exec brightnessctl set 10%-
 bindsym $mod+z split h;exec notify-send 'tile horizontally'
 bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+q split toggle
+exec --no-startup-id nm-applet

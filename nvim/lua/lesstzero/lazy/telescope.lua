@@ -1,119 +1,84 @@
 return {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.6',
-    dependencies = { 'nvim-lua/plenary.nvim', "nvim-telescope/telescope-file-browser.nvim" },
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope-fzf-native.nvim',
+        'nvim-tree/nvim-web-devicons',
+    },
     cmd = "Telescope",
     keys = {
-        { "<leader>fa", "<cmd>Telescope oldfiles<cr>",                   desc = "Telescope" },
-        { "<leader>ff", "<cmd>Telescope find_files<cr>",                 desc = "Telescope" },
-        { "<leader>fr", "<cmd>Telescope live_grep<cr>",                  desc = "Telescope" },
-        { "<leader>ht", "<cmd>Telescope colorscheme<cr>",                desc = "Telescope" },
-        { "<leader>fb", "<cmd>Telescope file_browser<cr>",               desc = "File browser" },
-        { "<leader>fw", "<cmd>Telescope buffers sort_lastused=true<cr>", desc = "Buffers sorted by last used" }
+        { "<leader>fa", "<cmd>Telescope oldfiles<cr>",                                                desc = "Recent files" },
+        { "<leader>ff", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files,-u<cr>", desc = "Find files" },
+        { "<leader>fr", "<cmd>Telescope live_grep<cr>",                                               desc = "Live grep" },
+        { "<leader>ht", "<cmd>Telescope colorscheme<cr>",                                             desc = "Color schemes" },
+        { "<leader>fw", "<cmd>Telescope buffers sort_lastused=true<cr>",                              desc = "Buffers sorted by last used" }
     },
-    -- config = function(_, opts)
-    --     local telescope = require("telescope")
-    --     local fb_actions = require("telescope").extensions.file_browser.actions
-    --
-    --     opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
-    --         wrap_results = true,
-    --         layout_strategy = "horizontal",
-    --         layout_config = { prompt_position = "top" },
-    --         sorting_strategy = "ascending",
-    --         winblend = 0,
-    --         mappings = {
-    --             n = {},
-    --         },
-    --     })
-    --     opts.pickers = {
-    --         diagnostics = {
-    --             theme = "ivy",
-    --             initial_mode = "normal",
-    --             layout_config = {
-    --                 preview_cutoff = 9999,
-    --             },
-    --         },
-    --     }
-    --     opts.extensions = {
-    --         file_browser = {
-    --             theme = "dropdown",
-    --             -- disables netrw and use telescope-file-browser in its place
-    --             hijack_netrw = true,
-    --             mappings = {
-    --                 -- your custom insert mode mappings
-    --                 ["n"] = {
-    --                     -- your custom normal mode mappings
-    --                     ["a"] = fb_actions.create,
-    --                     ["h"] = fb_actions.goto_parent_dir,
-    --                     ['c'] = false,
-    --                     ["o"] = function(prompt_bufnr)
-    --                         require("telescope.actions").select_default(prompt_bufnr)
-    --                     end,
-    --                     ["<C-u>"] = function(prompt_bufnr)
-    --                         for i = 1, 10 do
-    --                             actions.move_selection_previous(prompt_bufnr)
-    --                         end
-    --                     end,
-    --                     ["<C-d>"] = function(prompt_bufnr)
-    --                         for i = 1, 10 do
-    --                             actions.move_selection_next(prompt_bufnr)
-    --                         end
-    --                     end,
-    --                     ["<PageUp>"] = actions.preview_scrolling_up,
-    --                     ["<PageDown>"] = actions.preview_scrolling_down,
-    --                 },
-    --             },
-    --         },
-    --     }
-    --     telescope.setup(opts)
-    --     require("telescope").load_extension("fzf")
-    --     require("telescope").load_extension("file_browser")
-    -- end,
-
     config = function()
         local actions = require("telescope.actions")
-        require("telescope").setup({
+        local telescope = require("telescope")
+
+        telescope.setup({
             defaults = {
-                file_ignore_patterns = { "%.class", "node_modules" },
-                theme = "center",
-                --sorting_strategy = "ascending",
-                -- layout_config = {
-                --     horizontal = {
-                --         prompt_position = "top",
-                --     },
-                -- },
-
-            },
-            extensions = {
-                file_browser = {
-                    theme = "ivy",
-                    -- disables netrw and use telescope-file-browser in its place
-                    initial_mode = "normal",
-                    hijack_netrw = true,
-                    mappings = {
-                        ["i"] = {
-                        },
-                        ["n"] = {
-                            ["a"] = function(prompt_bufnr)
-                                local fb_actions = require("telescope._extensions.file_browser.actions")
-                                fb_actions.create(prompt_bufnr)
-                            end,
-                            ["<C-u>"] = function(prompt_bufnr)
-                                for i = 1, 10 do
-                                    actions.move_selection_previous(prompt_bufnr)
-                                end
-                            end,
-                            ["<C-d>"] = function(prompt_bufnr)
-                                for i = 1, 10 do
-                                    actions.move_selection_next(prompt_bufnr)
-                                end
-                            end,
-
-                        },
+                file_ignore_patterns = { "%.class", "node_modules", ".git/", ".cache", "%.o", "%.a", "%.out", "%.pdf" },
+                vimgrep_arguments = {
+                    "rg",
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--smart-case",
+                    "--hidden",
+                },
+                prompt_prefix = "   ",
+                selection_caret = "  ",
+                entry_prefix = "  ",
+                initial_mode = "insert",
+                selection_strategy = "reset",
+                sorting_strategy = "ascending",
+                layout_strategy = "horizontal",
+                layout_config = {
+                    horizontal = {
+                        prompt_position = "top",
+                        preview_width = 0.55,
+                        results_width = 0.8,
+                    },
+                    vertical = {
+                        mirror = false,
+                    },
+                    width = 0.87,
+                    height = 0.80,
+                    preview_cutoff = 120,
+                },
+                path_display = { "truncate" },
+                winblend = 0,
+                border = {},
+                color_devicons = true,
+                set_env = { ["COLORTERM"] = "truecolor" },
+                mappings = {
+                    i = {
+                        ["<C-n>"] = actions.cycle_history_next,
+                        ["<C-p>"] = actions.cycle_history_prev,
+                        ["<C-j>"] = actions.move_selection_next,
+                        ["<C-k>"] = actions.move_selection_previous,
                     },
                 },
             },
+            pickers = {
+                find_files = {
+                    hidden = true,
+                },
+            },
+            extensions = {
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = "smart_case",
+                },
+            },
         })
+        telescope.load_extension("fzf")
     end
-
 }
